@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Company X</title>
+<title>SHADO, LLC</title>
 
 <style>
   :root {
@@ -156,6 +156,15 @@
   h1 {
     font-size: 42px;
     margin-bottom: 16px;
+    transition: opacity 0.45s ease, transform 0.45s ease;
+    will-change: transform, opacity;
+  }
+
+  p {
+    color: var(--muted);
+    margin-bottom: 16px;
+    transition: opacity 0.45s ease, transform 0.45s ease;
+    will-change: transform, opacity;
   }
 
   h2 {
@@ -164,9 +173,20 @@
     color: var(--accent);
   }
 
-  p {
-    color: var(--muted);
-    margin-bottom: 16px;
+  .hero-divider {
+    height: 1px;
+    width: 100%;
+    margin-top: 26px;
+    margin-bottom: 10px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(125,211,252,0.35),
+      rgba(255,255,255,0.08),
+      rgba(125,211,252,0.35),
+      transparent
+    );
+    opacity: 0.7;
   }
 
   .cta-wrap {
@@ -235,7 +255,7 @@
 <canvas id="noiseCanvas"></canvas>
 
 <header>
-  <div class="brand">Company X</div>
+  <div class="brand">SHADO | Technology Solutions</div>
 
   <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">
     <div class="dot"></div>
@@ -252,29 +272,31 @@
 </div>
 
 <section id="home">
-  <h1>Modern Company. Traditional Business Values.</h1>
-  <p>
-    Company X delivers clean, secure, and scalable solutions for modern organizations.
-  </p>
+  <div id="heroSlide">
+    <h1 id="heroTitle"></h1>
+    <p id="heroText"></p>
+  </div>
+
+  <div class="hero-divider"></div>
 
   <div class="cta-wrap">
-    <a class="cta-btn" href="#contact">Request Free Consultation</a>
+    <a class="cta-btn" href="#contact">Request Consultation</a>
   </div>
 </section>
 
 <section id="services">
   <h2>Services</h2>
-  <p>Design tailored for SMB and enterprise environments.</p>
+  <p>Network architecture, cybersecurity operations, and infrastructure hardening for SMB and enterprise environments.</p>
 </section>
 
 <section id="about">
   <h2>About</h2>
-  <p>We focus on clarity, reliability, and systems that scale without unnecessary complexity.</p>
+  <p>SHADO delivers disciplined engineering with a focus on resilient systems, clear architecture, and practical security outcomes.</p>
 </section>
 
 <section id="contact">
   <h2>Contact</h2>
-  <p>Email: contact@companyx.example</p>
+  <p>Email: contact@shado.local</p>
   <p>Response time: 24–48 hours</p>
 </section>
 
@@ -283,7 +305,7 @@
 </div>
 
 <footer>
-  © 2026 Company X. All rights reserved. U.S. Founded Engineering and Support Operations.
+  © 2026 SHADO, LLC. All rights reserved.
 </footer>
 
 <script>
@@ -322,6 +344,70 @@
       backToTop.classList.remove("show");
     }
   });
+
+  const slides = [
+    {
+      title: "Modern security. Traditional discipline.",
+      text: "Engineering-first approach to resilient infrastructure and cyber defense."
+    },
+    {
+      title: "Network architecture built for resilience.",
+      text: "Designing systems that withstand failure, attack, and scale demands."
+    },
+    {
+      title: "Cyber defense for modern organizations.",
+      text: "Protecting SMBs with enterprise-grade security practices."
+    },
+    {
+      title: "Infrastructure clarity. Operational control.",
+      text: "Simplifying complex environments into manageable, secure systems."
+    },
+    {
+      title: "Secure. Scalable. SHADO.",
+      text: "Technology solutions built for real-world reliability and growth."
+    }
+  ];
+
+  let index = 0;
+
+  const heroTitle = document.getElementById("heroTitle");
+  const heroText = document.getElementById("heroText");
+
+  let animating = false;
+
+  function renderSlide(next = false) {
+    if (animating) return;
+    animating = true;
+
+    heroTitle.style.opacity = "0";
+    heroText.style.opacity = "0";
+    heroTitle.style.transform = "translateY(12px)";
+    heroText.style.transform = "translateY(12px)";
+
+    setTimeout(() => {
+      if (next) {
+        index = (index + 1) % slides.length;
+      }
+
+      heroTitle.textContent = slides[index].title;
+      heroText.textContent = slides[index].text;
+
+      requestAnimationFrame(() => {
+        heroTitle.style.opacity = "1";
+        heroText.style.opacity = "1";
+        heroTitle.style.transform = "translateY(0px)";
+        heroText.style.transform = "translateY(0px)";
+        animating = false;
+      });
+    }, 250);
+  }
+
+  function nextSlide() {
+    renderSlide(true);
+  }
+
+  renderSlide(false);
+  setInterval(nextSlide, 4000);
 
   const canvas = document.getElementById("noiseCanvas");
   const ctx = canvas.getContext("2d");
