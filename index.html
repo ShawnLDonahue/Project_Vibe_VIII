@@ -322,6 +322,7 @@
             transform: translateY(20px);
             animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.9s;
             z-index: 5;
+            margin-bottom: 40px;
         }
 
         .btn {
@@ -373,8 +374,6 @@
 
         /* --- Scroll Indicator --- */
         .scroll-down {
-            position: absolute;
-            bottom: 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -386,6 +385,8 @@
             text-decoration: none;
             opacity: 0.6;
             transition: opacity 0.3s;
+            margin-top: auto;
+            cursor: pointer;
         }
         .scroll-down:hover { opacity: 1; }
         .scroll-line {
@@ -790,6 +791,9 @@
             .hero-centerpiece { width: 240px; height: 240px; }
             .ring-1 { width: 290px; height: 290px; }
             .ring-2 { width: 340px; height: 340px; }
+
+            .hero-cta-group { flex-direction: column; gap: 15px; width: 100%; max-width: 280px; margin-bottom: 30px; }
+            .btn { width: 100%; }
 
             .services-grid { grid-template-columns: 1fr; }
             .contact-form { grid-template-columns: 1fr; }
